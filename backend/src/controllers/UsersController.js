@@ -1,25 +1,31 @@
-import {Database} from '../database/database.js'
+import { Database } from "../database/database.js";
 const database = new Database();
 
 export class UsersController {
-  create(req, res) {
-    const { name, email, password } = req.body;
+  async create(req, res) {
+    try {
+      const { name, email, password } = req.body;
 
-    const user = {
-      name,
-      email,
-      password,
-    };
+      const user = {
+        name,
+        email,
+        password,
+      };
 
-    database.insert("users", user);
-    return res.writeHead(201).end()
+      await database.insert("users", user);
+
+      return res.status(201).json({ message: "Usuário criado com sucesso!" });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  index(req, res) {
-    const users = database.select("users");
-    
-    return res.end(JSON.stringify(users))
+  async index(req, res) {
+    try {
+      const users = await database.select("users");
+      return res.end(JSON.stringify(users));
+    } catch (e) {
+      console.log(e);
+    }
   }
-
 }
-

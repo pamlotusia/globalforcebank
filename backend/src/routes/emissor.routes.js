@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { EmissorController } from "../controllers/EmissorController.js";
 
+export const emitterRoutes = Router();
+const emitterController = new EmissorController();
 
-export const emissorRoutes = Router()
-const emissorController  =  new EmissorController()
-
-emissorRoutes.post('/', emissorController.create)
-emissorRoutes.get('/', emissorController.index)
+emitterRoutes.get("/", emitterController.index);
+emitterRoutes.post("/", emitterController.create);
