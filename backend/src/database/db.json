@@ -1,1 +1,8 @@
-{"emitters":{"cnpj":"123.456.789","adress":[{"rua":"ruaA","numero":1,"complemento":"prédio","cep":"000000","cidade":"Sao Paulo","estado":"SP"}],"email":"empresa1@gmail.com","tel":1199998888,"category":"Sociedade Anônima"}}
+{
+  "emitters": [
+    {
+      "name": "Empresa 20 ",
+      "cnpj": "123.456.789"
+    }
+  ]
+}
