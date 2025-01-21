@@ -1,5 +1,4 @@
 import {Database} from '../database/database.js'
-
 const database = new Database();
 
 export class UsersController {
@@ -13,18 +12,14 @@ export class UsersController {
     };
 
     database.insert("users", user);
-
-    return res.status(201).json({});
+    return res.writeHead(201).end()
   }
 
   index(req, res) {
     const users = database.select("users");
-    res.json({users}
-    );
+    
+    return res.end(JSON.stringify(users))
   }
 
-  delete(req, res){
-
-  }
 }
 

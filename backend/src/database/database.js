@@ -1,27 +1,36 @@
-import fs from "node:fs/promises";
+import fs from 'node:fs/promises'
 
 const databasePath = new URL('db.json', import.meta.url)
 
-export class Database {
-  #database = {};
-  
+export class Database{
+  #database = {}
 
-  #persist() {
+  constructor(){
+    fs.readFile(databasePath, 'utf8').then(()=> {
+      this.#database = JSON.parse(data)
+    })
+    .catch(()=>{
+      this.#persist()
+    })
+  }
+
+  #persist(){
     fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
 
-  select(table) {
-    const data = this.#database[table] ?? [];
-    return data;
+  select(table){
+    const data = this.#database[table] ?? []
+    return data
   }
 
-  insert(table, data) {
-    if (Array.isArray(this.#database[table])) {
-      this.#database[table].push(data);
+  insert(table, data){
+    if(Array.isArray(this.#database[table])){
+      this.#database.push(data)
     } else {
-      this.#database[table] = [data];
+      this.#database[table] = data
     }
-    this.#persist();
-    return data;
+
+    this.#persist()
+    return data
   }
 }

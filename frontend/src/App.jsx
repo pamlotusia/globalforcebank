@@ -1,4 +1,5 @@
   import React, { useEffect, useState } from 'react';
+  import database from '../../backend/src/database/db.json'
 
   function App() {
     const [message, setMessage] = useState('');
@@ -15,7 +16,7 @@
 
     return (
       <div className="App">
-        <h1>Olá do React!</h1>
+        <h1>ghghjghjgh</h1>
       </div>
     );
   }
