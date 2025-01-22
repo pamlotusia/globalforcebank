@@ -3,10 +3,8 @@ const database = new Database();
 
 export class EmissorController {
   async create(req, res) {
-      // const { name, cnpj, adress, email, tel, category, cvm, principalActivity } = req.body;
       const { name, cnpj } = req.body;
 
-      // const emitter = { name, cnpj, adress, email, tel, category, cvm, principalActivity };
       const emitter = { name, cnpj };
 
       await database.insert("emitters", emitter);
