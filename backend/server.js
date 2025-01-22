@@ -17,10 +17,6 @@ import {routes} from './src/routes/index.js'
 app.use('/api', routes); 
 
 
-// Rota simples
-app.get('/', (req, res) => {
-  res.send('Olá do Backend!');
-});
 
 app.listen(port, () => {
   console.log(`Backend rodando na porta ${port}`);

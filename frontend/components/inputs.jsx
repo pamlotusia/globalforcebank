@@ -7,11 +7,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
-export function Input({ id, label, type, name, onChange}) {
+
+export function  Input({ id, label, type, onChange, value}) {
   return (
     <div className={styles.container}>
       <label htmlFor={id}>{label}</label>
-      <input type={type} className={styles.input} name={name} onChange={onchange}/>
+      <input type={type} className={styles.input} onChange={onChange} value={value}/>
     </div>
   );
 }

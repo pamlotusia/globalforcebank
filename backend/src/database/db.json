@@ -1,8 +1,7 @@
 {
-  "emitters": [
+  "users": [
     {
-      "name": "Empresa 20 ",
-      "cnpj": "123.456.789"
+      "name": "cscasca"
     }
   ]
 }
