@@ -16,7 +16,7 @@ export class Database {
   }
 
   #persist() {
-    fs.writeFile(databasePath, JSON.stringify(this.#database, null, 2));
+    fs.writeFile(databasePath, JSON.stringify(this.#database));
   }
 
   select(table) {
@@ -26,10 +26,11 @@ export class Database {
   insert(table, data) {
     if (!Array.isArray(this.#database[table])) {
       this.#database[table] = [];
-
+    } else {
       this.#database[table].push(data);
       this.#persist();
-      return data;
     }
+
+    return data;
   }
 }

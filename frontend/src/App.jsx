@@ -14,6 +14,13 @@ import { api } from "../src/services/api";
 function App() {
   const [name, setName] = useState('')
   const [cnpj, setCnpj] = useState('')
+  const [endereco, setEndereco] = useState([])
+  const [email, setEmail] = useState('')
+  const [tel, setTel] = useState('')
+  const [categoria, setCategoria] = useState('')
+  const [registroCvm, setRegistroCvm] = useState('')
+  const [atividade, setAtividade] = useState('')
+
 
   function handleSubmit(){
     console.log(name, cnpj)
