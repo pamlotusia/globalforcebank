@@ -8,7 +8,10 @@ export class EmissorController {
       cnpj,
       email,
       tel,
-      categoria,
+      typeEmisser,
+      typeDebenture,
+      typePayment,
+      typeGuarantees,
       rua,
       numero,
       complemento,
@@ -17,6 +20,8 @@ export class EmissorController {
       estado,
       registroCvm,
       atividade,
+      amortizacao,
+      purposeCapture
     } = req.body;
 
     const emitter = {
@@ -24,7 +29,10 @@ export class EmissorController {
       cnpj,
       email,
       tel,
-      categoria,
+      typeEmisser,
+      typeDebenture,
+      typePayment,
+      typeGuarantees,
       rua,
       numero,
       complemento,
@@ -33,6 +41,8 @@ export class EmissorController {
       estado,
       registroCvm,
       atividade,
+      amortizacao,
+      purposeCapture
     };
 
     await database.insert("emitters", emitter);
