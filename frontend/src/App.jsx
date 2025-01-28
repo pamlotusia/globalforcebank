@@ -30,7 +30,10 @@ function App() {
   const [registroCvm, setRegistroCvm] = useState("");
   const [atividade, setAtividade] = useState("");
   const [amortizacao, setAmortizacao] = useState("");
+  const [guarantees, setGuarantees] = useState('')
   const [purposeCapture, setPurposeCapture] = useState("");
+  const [unitValue, setUnitValue] = useState('')
+  const [debenturesEmitidas, setDebenturesEmitidas] = useState('')
 
   const dropdownEmisser = [
     {
@@ -54,47 +57,55 @@ function App() {
     },
   ];
 
-  function handleSubmit() {
-    console.log(
-      name,
-      cnpj,
-      email,
-      tel,
-      typeEmisser,
-      typeDebenture,
-      typePayment,
-      typeGuarantees,
-      rua,
-      numero,
-      complemento,
-      cep,
-      cidade,
-      estado,
-      registroCvm,
-      atividade,
-      amortizacao,
-      purposeCapture
-    );
+  const [riskFiles, setRiskFiles] = useState({
+    mercado: null,
+    liquidez: null,
+    tecnologicos: null,
+    regulatorios: null,
+    garantias: null,
+  });
 
+  function handleSubmit() {
+    const formData = new FormData();
+
+    // Adicionar os campos de texto no FormData
+    formData.append("name", name);
+    formData.append("cnpj", cnpj);
+    formData.append("email", email);
+    formData.append("tel", tel);
+    formData.append("typeEmisser", typeEmisser);
+    formData.append("typeDebenture", typeDebenture);
+    formData.append("typePayment", typePayment);
+    formData.append("typeGuarantees", typeGuarantees);
+    formData.append("rua", rua);
+    formData.append("numero", numero);
+    formData.append("complemento", complemento);
+    formData.append("cep", cep);
+    formData.append("cidade", cidade);
+    formData.append("estado", estado);
+    formData.append("registroCvm", registroCvm);
+    formData.append("atividade", atividade);
+    formData.append("amortizacao", amortizacao);
+    formData.append("purposeCapture", purposeCapture);
+    formData.append('valor_unitario', unitValue)
+    formData.append('garantias_oferecidas', guarantees)
+    formData.append('debentures_emitidas', debenturesEmitidas)
+
+    // Adicionar os arquivos no FormData
+    if (riskFiles.mercado) formData.append("risks_mercado", riskFiles.mercado);
+    if (riskFiles.liquidez)
+      formData.append("risks_liquidez", riskFiles.liquidez);
+    if (riskFiles.tecnologicos)
+      formData.append("risks_tecnologicos", riskFiles.tecnologicos);
+    if (riskFiles.regulatorios)
+      formData.append("risks_regulatorios", riskFiles.regulatorios);
+    if (riskFiles.garantias)
+      formData.append("risks_garantias", riskFiles.garantias);
     api
-      .post("/emitters", {
-        name,
-        cnpj,
-        email,
-        tel,
-        typeEmisser,
-        typeDebenture,
-        typePayment,
-        typeGuarantees,
-        rua,
-        numero,
-        complemento,
-        cep,
-        cidade,
-        estado,
-        registroCvm,
-        atividade,
-        amortizacao,
+      .post("/emitters", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then(() => console.log("criado com sucesso"))
       .catch(() => console.log("Algo deu errado"));
@@ -201,16 +212,26 @@ function App() {
           Campos específicos das características financeiras e operacionais da
           emissão.
         </p>
-        <Input label={"Código de Emissão"} />{" "}
+
+
+{/* gerar codigo automatico uuid*/}
+        <Input label="Código de Emissão" onChange={ e => setCodigoEmissao(uuidv4)}/>{" "}
+
         <DropdownMenu
           value={typeDebenture}
           onChange={(value) => setTypeDebenture(value)}
           items={dropdownTypeDebenture}
         />
         <Issuedate />
+
+        {/* pegar data e mandar para banco*/}
         <Input type="date" label="Data de Vencimento" />
-        <Input type="text" label="Valor Nominal Unitário " />
-        <Input type="text" label=" Quantidade de Debêntures Emitidas" />
+
+        <Input type="text" label="Valor Nominal Unitário " 
+        onChange={(e)=> setUnitValue(e.target.value)
+        }/>
+        <Input type="text" label=" Quantidade de Debêntures Emitidas" 
+        onChange={e => setDebenturesEmitidas(e.value.target)}/>
         <DropdownMenu
           value={typePayment}
           onChange={(value) => setTypePayment(value)}
@@ -221,8 +242,11 @@ function App() {
           onChange={(value) => setTypeGuarantees(value)}
           items={dropdownGuaranteesOffered}
         />
-        <Input type="text" label="Garantias Oferecidas" />
-        <Input type="text" label="Finalidade da Captação" />
+        <Input type="text" label="Garantias Oferecidas" 
+        onChange={(e)=> setGuarantees(e.target.value)}/>
+
+        <Input type="text" label="Finalidade da Captação" 
+        onChange={(e)=> setPurposeCapture(e.targte.value)}/>
         <Checkbox value={amortizacao} onChange={setAmortizacao} />
       </div>
 
@@ -234,11 +258,41 @@ function App() {
 
         <p>Envie os arquivos necessários.</p>
 
-        <Input type="file" label="Riscos de Mercado" />
-        <Input type="file" label="Riscos de Liquidez" />
-        <Input type="file" label="Riscos Tecnológicos" />
-        <Input type="file" label="Riscos Regulatórios" />
-        <Input type="file" label="Descrição das Garantias" />
+        <Input
+          type="file"
+          label="Riscos de Mercado"
+          onChange={(e) =>
+            setRiskFiles({ ...riskFiles, mercado: e.target.files[0] })
+          }
+        />
+        <Input
+          type="file"
+          label="Riscos de Liquidez"
+          onChange={(e) =>
+            setRiskFiles({ ...riskFiles, liquidez: e.target.files[0] })
+          }
+        />
+        <Input
+          type="file"
+          label="Riscos Tecnológicos"
+          onChange={(e) =>
+            setRiskFiles({ ...riskFiles, tecnologicos: e.target.files[0] })
+          }
+        />
+        <Input
+          type="file"
+          label="Riscos Regulatórios"
+          onChange={(e) =>
+            setRiskFiles({ ...riskFiles, regulatorios: e.target.files[0] })
+          }
+        />
+        <Input
+          type="file"
+          label="Descrição das Garantias"
+          onChange={(e) =>
+            setRiskFiles({ ...riskFiles, garantias: e.target.files[0] })
+          }
+        />
       </div>
 
       <button type="button" onClick={handleSubmit}>

@@ -4,6 +4,7 @@ import cors from'cors'
 const app = express();
 const port = 5000;
 
+
 // Permitir requisições de qualquer origem (não recomendado para produção)
 app.use(cors({
     origin: 'http://localhost:5173',  // O endereço do seu frontend

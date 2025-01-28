@@ -21,9 +21,15 @@ export class EmissorController {
       registroCvm,
       atividade,
       amortizacao,
-      purposeCapture
+      purposeCapture,
+      guarantees,
+      unitValue,
+      debenturesEmitidas,
+      codigoEmissao
     } = req.body;
 
+    const files = req.files
+    
     const emitter = {
       name,
       cnpj,
@@ -42,7 +48,12 @@ export class EmissorController {
       registroCvm,
       atividade,
       amortizacao,
-      purposeCapture
+      purposeCapture,
+      guarantees,
+      unitValue,
+      debenturesEmitidas,
+      codigoEmissao,
+      files
     };
 
     await database.insert("emitters", emitter);

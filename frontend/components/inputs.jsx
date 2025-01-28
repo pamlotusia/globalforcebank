@@ -1,6 +1,7 @@
 import styles from "./input.module.css";
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { v4 as uuidv4 } from 'uuid';
 
 
 import Button from "@mui/material/Button";
@@ -80,9 +81,9 @@ export function DropdownMenu({ items, value, onChange }) {
 }
 
 
-export function Textarea() {
+export function Textarea({onChange}) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onChange={onChange}>
       <label htmlFor="textarea">Atividade Principal</label>
       <textarea id="textarea"></textarea>
     </div>
@@ -121,5 +122,17 @@ export function Issuedate(){
       <p>{date}</p>
     </div>
 
+  )
+}
+
+export function CodigoEmissao(){
+  const [codigoEmissao, setCodigoEmissao] = useState('')
+
+  setCodigoEmissao(uuidv4)
+
+  return(
+    <div>
+      <p>{codigoEmissao}</p>
+    </div>
   )
 }
