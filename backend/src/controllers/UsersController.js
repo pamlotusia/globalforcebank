@@ -1,9 +1,10 @@
 import { pool } from '../database/connection.js'
 import bcrypt from 'bcrypt'
-
+// import { BankAccount } from './BankAccountController.js'
 export class UsersController {
   async create(req, res) {
     const db = pool
+    const bankAccount = new BankAccount()
     try {
       const { name, email, cpf, password } = req.body
       const hashedPassword = await bcrypt.hash(password, 8)
@@ -15,6 +16,7 @@ export class UsersController {
       `
 
       const values = [name, email, cpf, hashedPassword]
+      // bankAccount.create()
       const result = await db.query(insert, values)
 
       return res
