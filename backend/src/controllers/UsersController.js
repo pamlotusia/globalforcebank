@@ -8,6 +8,15 @@ export class UsersController {
       const { name, email, cpf, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 8);
 
+      const compare = `
+      SELECT email FROM correntistas
+      `
+      const userAlreadyExists = await db.query(compare)
+
+      if(userAlreadyExists === email){
+        console.log('usuario já existe')
+      }
+
       const insert = `
       INSERT INTO correntistas (name, email, cpf, password)
       VALUES ($1, $2, $3, $4)
