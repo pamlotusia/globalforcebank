@@ -3,10 +3,7 @@ import Home from "./pages/Home";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
-<<<<<<< HEAD
 import CadastroEmissor from "./pages/Emissor/Cadastro";
-=======
->>>>>>> fa8e150843d3796222a6f09c6220533038bed172
 import PainelCorrentista from "./pages/Correntista/PainelCorrentista";
 import MercadoMoedas from "./pages/Correntista/MercadoMoedas";
 import InvestimentoCorrentista from "./pages/Correntista/InvestimentoCorrentista";
@@ -22,10 +19,7 @@ const App = () => {
 				<Route path="/sobre" element={<Sobre />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Cadastro />} />
-<<<<<<< HEAD
 				<Route path="/cadastroEmissor" element={<CadastroEmissor />} />
-=======
->>>>>>> fa8e150843d3796222a6f09c6220533038bed172
 				{/*Correntista*/}
 				<Route path="/correntista/investimentos" element={<InvestimentoCorrentista />} />
 				<Route path="/correntista/mercado" element={<MercadoMoedas />} />
