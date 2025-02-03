@@ -1,0 +1,18 @@
+{
+    "codigo_emissao": "abc" ,
+    "tipo_debenture": "tipo1",
+    "data_emissao": "20/08/2025",
+    "data_vencimento": "20/08/2030",
+    "valor_nominal_unitario": "1.00",
+    "quantidade_debentures": "80000",
+    "remuneracao": "102%",
+    "periodicidade_pagamento": "mensal",
+    "garantias_oferecidas": "todas",
+    "finalidade_captacao": "null" ,
+    "amortizacao_antecipada": "possível",
+    "riscos_mercado": "baixo" ,
+    "riscos_liquidez": "baixo" ,
+    "riscos_tecnologicos": "baixo" ,
+    "riscos_regulatorios": "baixo" ,
+    "descricao_garantias": "texto grande" , 
+    "issuer_id": "1" }
