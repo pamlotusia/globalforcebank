@@ -38,12 +38,15 @@ export const InputStyle = styled.input`
   padding: 0.5rem;
 `;
 
+<<<<<<< HEAD
 export const SelectStyle = styled.select`
   border-radius: 1rem;
   font-size: 1em;
   padding: 0.5rem;
 `;
 
+=======
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
 export const TypeStyle = styled.span`
   font-size: 1em;
   color: black;
@@ -100,6 +103,7 @@ export const Input = ({
   );
 };
 
+<<<<<<< HEAD
 export const Select = ({
   label,
   onChange,
@@ -121,6 +125,8 @@ export const Select = ({
   );
 };
 
+=======
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

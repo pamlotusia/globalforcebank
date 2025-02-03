@@ -1,10 +1,15 @@
 import { green } from "@mui/material/colors";
 import {
+<<<<<<< HEAD
+=======
+  Button,
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
   Container,
   NavBody,
   NavButton,
   TypeStyle,
 } from "../../../components/Commons";
+<<<<<<< HEAD
 import { IoMdArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -88,6 +93,12 @@ function TabelaInvestimentos() {
     </TableContainer>
   );
 }
+=======
+import Table from "../../../components/Table";
+import { IoMdArrowForward } from "react-icons/io";
+import { Link } from "react-router-dom";
+
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
 const InvestimentoCorrentista = () => {
   return (
     <NavBody>
@@ -111,11 +122,19 @@ const InvestimentoCorrentista = () => {
           <NavButton to="/correntista/mercado">Investir</NavButton>
         </Container>
         <Container>
+<<<<<<< HEAD
           <TabelaInvestimentos />
+=======
+          <Table />
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
         </Container>
       </div>
     </NavBody>
   );
 };
 
+<<<<<<< HEAD
 export default InvestimentoCorrentista;
+=======
+export default InvestimentoCorrentista;
+>>>>>>> fa8e150843d3796222a6f09c6220533038bed172
