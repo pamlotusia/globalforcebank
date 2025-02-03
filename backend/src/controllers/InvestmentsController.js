@@ -1,4 +1,4 @@
-import { pool } from "../database/connection";
+import { pool } from "../database/connection.js";
 
 export class InvestmentsController{
     async create(req, res){
@@ -41,7 +41,7 @@ export class InvestmentsController{
         riscos_tecnologicos ,
         riscos_regulatorios ,
         descricao_garantias , 
-        issuer_id INT REFERENCES emissores(id)
+        issuer_id
         )
         VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16,  $17)
         `
@@ -66,12 +66,29 @@ export class InvestmentsController{
             issuer_id
         ]
 
-        const result = await db.query(insert, values)
-        .then(()=>{
+        try{
+            const result = await db.query(insert, values)
             console.log("Investimento cadastrado com sucesso!")
             return res.status(200).json({result})
-        })
-        .catch((e) => e.message)
+        }
+        catch(e){
+            return console.error(e.message)
+        }
+    }
 
+    async index(req, res){
+        const db = pool
+
+        const select = `
+        SELECT * FROM investments
+        `
+
+        try{
+            const { rows } = await db.query(select)
+            return res.json( rows )
+        }
+        catch(e){
+            return res.json({"message": e.message})
+        }
     }
 }
