@@ -38,6 +38,12 @@ export const InputStyle = styled.input`
   padding: 0.5rem;
 `;
 
+export const SelectStyle = styled.select`
+  border-radius: 1rem;
+  font-size: 1em;
+  padding: 0.5rem;
+`;
+
 export const TypeStyle = styled.span`
   font-size: 1em;
   color: black;
@@ -90,6 +96,27 @@ export const Input = ({
     <div>
       <TypeStyle>{label} </TypeStyle>
       <InputStyle onChange={onChange} value={value} type={type} />
+    </div>
+  );
+};
+
+export const Select = ({
+  label,
+  onChange,
+  children,
+}: {
+  label: string;
+  onChange: Function;
+  value: any;
+  type?: string;
+  children: any,
+}) => {
+  return (
+    <div>
+      <TypeStyle>{label} </TypeStyle>
+      <SelectStyle onChange={(e) => onChange(e)} >
+      {children}
+      </SelectStyle>
     </div>
   );
 };

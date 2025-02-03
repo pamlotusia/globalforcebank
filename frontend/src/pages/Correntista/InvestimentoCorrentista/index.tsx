@@ -1,15 +1,93 @@
 import { green } from "@mui/material/colors";
 import {
-  Button,
   Container,
   NavBody,
   NavButton,
   TypeStyle,
 } from "../../../components/Commons";
-import Table from "../../../components/Table";
 import { IoMdArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function createData(
+  nomeMoeda: string,
+  quantidadeMoedas: number,
+  totalInvestido: number,
+  vencimento: string,
+  simule: string
+) {
+  return {
+  nomeMoeda,
+  quantidadeMoedas,
+  totalInvestido,
+  vencimento,
+  simule
+  };
+}
+
+const rows = [
+  createData("Aracaju", 10, 100, "01/01/2035", "/"),
+];
+
+function TabelaInvestimentos() {
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Moeda</StyledTableCell>
+            <StyledTableCell align="right">Quantidade de Moedas</StyledTableCell>
+            <StyledTableCell align="right">Total Investido</StyledTableCell>
+            <StyledTableCell align="right">Vencimento</StyledTableCell>
+            <StyledTableCell align="right">Simular Retirada</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <StyledTableRow key={row.nomeMoeda}>
+              <StyledTableCell component="th" scope="row">
+                {row.nomeMoeda}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.quantidadeMoedas}</StyledTableCell>
+              <StyledTableCell align="right">R$ {row.totalInvestido},00</StyledTableCell>
+              <StyledTableCell align="right">{row.vencimento}</StyledTableCell>
+              <StyledTableCell align="right">
+                <NavButton to={row.simule}>Simule</NavButton>
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
 const InvestimentoCorrentista = () => {
   return (
     <NavBody>
@@ -33,7 +111,7 @@ const InvestimentoCorrentista = () => {
           <NavButton to="/correntista/mercado">Investir</NavButton>
         </Container>
         <Container>
-          <Table />
+          <TabelaInvestimentos />
         </Container>
       </div>
     </NavBody>
