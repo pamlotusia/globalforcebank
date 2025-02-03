@@ -20,7 +20,6 @@ CREATE TABLE correntistas (
 -- Tabela para usuários emissores
 CREATE TABLE emissores (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
     nome_emissor VARCHAR(200) NOT NULL,
     cnpj VARCHAR(18) NOT NULL, -- Formato: 00.000.000/0000-00

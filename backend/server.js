@@ -1,3 +1,4 @@
+import {routes} from './src/routes/index.js'
 import express from'express'
 import cors from'cors'
 
@@ -13,7 +14,6 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-import {routes} from './src/routes/index.js'
 
 app.use('/api', routes); 
 

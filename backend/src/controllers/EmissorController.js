@@ -1,68 +1,84 @@
-import { Database } from "../database/database.js";
-const database = new Database();
+import { pool } from "../database/connection.js";
 
 export class EmissorController {
   async create(req, res) {
+    const db = pool;
+
     const {
-      name,
+      password,
+      nome_emissor,
       cnpj,
-      email,
-      tel,
-      typeEmisser,
-      typeDebenture,
-      typePayment,
-      typeGuarantees,
-      rua,
-      numero,
-      complemento,
-      cep,
-      cidade,
-      estado,
-      registroCvm,
-      atividade,
-      amortizacao,
-      purposeCapture,
-      guarantees,
-      unitValue,
-      debenturesEmitidas,
-      codigoEmissao
+      endereco_rua,
+      endereco_numero,
+      endereco_complemento,
+      endereco_cep,
+      endereco_cidade,
+      endereco_estado,
+      email_contato,
+      telefone_contato,
+      categoria_emissor,
+      registro_cvm,
+      atividade_principal,
     } = req.body;
 
-    const files = req.files
-    
-    const emitter = {
-      name,
+    const files = req.files;
+
+    const insert = `
+    INSERT INTO emissores (
+    password, 
+    nome_emissor, 
+    cnpj, 
+    endereco_rua,
+    endereco_numero,
+    endereco_complemento,
+    endereco_cep,
+    endereco_cidade,
+    endereco_estado,
+    email_contato,
+    telefone_contato,
+    categoria_emissor,
+    registro_cvm,
+    atividade_principal
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+    `;
+
+    const values = [
+      password,
+      nome_emissor,
       cnpj,
-      email,
-      tel,
-      typeEmisser,
-      typeDebenture,
-      typePayment,
-      typeGuarantees,
-      rua,
-      numero,
-      complemento,
-      cep,
-      cidade,
-      estado,
-      registroCvm,
-      atividade,
-      amortizacao,
-      purposeCapture,
-      guarantees,
-      unitValue,
-      debenturesEmitidas,
-      codigoEmissao,
-      files
-    };
-
-    await database.insert("emitters", emitter);
-
-    return res.status(201).json({ emitter });
+      endereco_rua,
+      endereco_numero,
+      endereco_complemento,
+      endereco_cep,
+      endereco_cidade,
+      endereco_estado,
+      email_contato,
+      telefone_contato,
+      categoria_emissor,
+      registro_cvm,
+      atividade_principal,
+    ];
+    try {
+      const result = await db.query(insert, values);
+      return res.status(200).json();
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 
   async index(req, res) {
-    const emitters = await database.select("emitters");
-    return res.json(emitters);
+    const db = pool;
+
+    const select = `
+    SELECT * FROM emissores
+   `;
+
+    try {
+      const {rows} = await db.query(select);
+      return res.status(200).json(rows);
+    } catch (e) {
+      console.log(e.messate);
+    }
   }
 }

@@ -1,0 +1,16 @@
+{
+    "password": "123", 
+    "nome_emissor": "empresa1", 
+    "cnpj": "123", 
+    "endereco_rua": "rua1",
+    "endereco_numero": "123",
+    "endereco_complemento": "prédio comercial",
+    "endereco_cep": "123",
+    "endereco_cidade": "cidade 1",
+    "endereco_estado": "sp",
+    "email_contato": "empresa1@empresa1.com",
+    "telefone_contato": "123",
+    "categoria_emissor": "categoria 1",
+    "registro_cvm": "123",
+    "atividade_principal": "atividade 1"
+}

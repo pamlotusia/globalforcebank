@@ -1,4 +1,6 @@
   import { useState } from "react";
+  import { useNavigate } from "react-router-dom";
+
   import {
     Body,
     Input,
@@ -19,6 +21,7 @@
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordAgain, setPasswordAgain] = useState<string>("");
+    const navigate = useNavigate()
 
     function handleSubmit() {
       const formData = new FormData()
@@ -27,6 +30,7 @@
       formData.append("cpf", cpf )
       formData.append("email", email)
       formData.append("password", password)
+      formData.append("passwordAgain", passwordAgain)
 
       api.post("/users", formData, {
         headers: {
@@ -34,7 +38,10 @@
         },
       })
 
-      .then(() => console.log("criado com sucesso"))
+      .then(() => {
+        console.log("Criado com sucesso!")
+        navigate('/')
+      })
       .catch(() => console.log("Algo deu errado"));
     }
 

@@ -22,19 +22,5 @@ async function testConnection() {
   }
 }
 
-const createBankAccount = async () => {
-  const client = await pool.connect();
-  try {
-    console.log("db conectado");
-
-    
-
-    console.log("tabela bankAccount criada com sucesso");
-  } catch (error) {
-    console.error("erro ao criar tabela: ", error);
-  }
-};
-
-createBankAccount();
 
 testConnection();
