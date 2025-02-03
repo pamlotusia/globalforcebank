@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
+import CadastroEmissor from "./pages/Emissor/Cadastro";
 import PainelCorrentista from "./pages/Correntista/PainelCorrentista";
 import MercadoMoedas from "./pages/Correntista/MercadoMoedas";
 import InvestimentoCorrentista from "./pages/Correntista/InvestimentoCorrentista";
@@ -18,6 +19,7 @@ const App = () => {
 				<Route path="/sobre" element={<Sobre />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Cadastro />} />
+				<Route path="/cadastroEmissor" element={<CadastroEmissor />} />
 				{/*Correntista*/}
 				<Route path="/correntista/investimentos" element={<InvestimentoCorrentista />} />
 				<Route path="/correntista/mercado" element={<MercadoMoedas />} />
