@@ -21,8 +21,6 @@ export class EmissorController {
       atividade_principal,
     } = req.body;
 
-    const files = req.files;
-
     const insert = `
     INSERT INTO emissores (
     password, 

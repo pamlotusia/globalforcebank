@@ -4,6 +4,9 @@ export class InvestmentsController{
     async create(req, res){
         const db = pool
 
+        const files = req.files;
+        console.log(files)
+
         const {
             codigo_emissao ,
             tipo_debenture ,
@@ -16,12 +19,8 @@ export class InvestmentsController{
             garantias_oferecidas,
             finalidade_captacao ,
             amortizacao_antecipada,
-            riscos_mercado ,
-            riscos_liquidez ,
-            riscos_tecnologicos ,
-            riscos_regulatorios ,
-            descricao_garantias , 
-            issuer_id } = req.body 
+            fk_emisser 
+        } = req.body 
 
         const insert = `
         INSERT INTO investments (
@@ -41,7 +40,7 @@ export class InvestmentsController{
         riscos_tecnologicos ,
         riscos_regulatorios ,
         descricao_garantias , 
-        issuer_id
+        fk_emisser
         )
         VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16,  $17)
         `
@@ -58,12 +57,12 @@ export class InvestmentsController{
             garantias_oferecidas,
             finalidade_captacao ,
             amortizacao_antecipada,
-            riscos_mercado ,
-            riscos_liquidez ,
-            riscos_tecnologicos ,
-            riscos_regulatorios ,
-            descricao_garantias , 
-            issuer_id
+            files.riscos_mercado[0].filename ,
+            files.riscos_liquidez[0].filename ,
+            files.riscos_tecnologicos[0].filename ,
+            files.riscos_regulatorios[0].filename ,
+            files.descricao_garantias[0].filename , 
+            fk_emisser
         ]
 
         try{

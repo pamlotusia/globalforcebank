@@ -56,7 +56,7 @@ CREATE TABLE investments (
     riscos_tecnologicos TEXT,
     riscos_regulatorios TEXT,
     descricao_garantias TEXT, 
-    issuer_id INT REFERENCES emissores(id) ON DELETE CASCADE, -- Emissor do investimento
+    fk_emisser INT REFERENCES emissores(id) ON DELETE CASCADE, -- Emissor do investimento
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
