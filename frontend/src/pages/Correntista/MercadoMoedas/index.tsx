@@ -46,18 +46,15 @@ interface Investment {
 }
 
 function MercadoTabela() {
-  const [investments, setInvestments] = useState<Investment[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [investments, setInvestments] = useState<any>([]);
 
   useEffect(()=> {
     api.get('/investments')
     .then(response => {
       setInvestments(response.data)
-      setLoading(false)
     })
     .catch(error => {
-      console.error(Error)
-      setLoading(false)
+      console.error(error)
     })
   }, [])
 
@@ -102,18 +99,15 @@ function MercadoTabela() {
 }
 
 function MercadoCard() {
-  const [investments, setInvestments] = useState<Investment[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [investments, setInvestments] = useState<any[]>([]);
 
   useEffect(()=> {
     api.get('/investments')
     .then(response => {
       setInvestments(response.data)
-      setLoading(false)
     })
     .catch(error => {
-      console.error(Error)
-      setLoading(false)
+      console.error(error)
     })
   }, []) 
 
