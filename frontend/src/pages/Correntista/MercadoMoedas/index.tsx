@@ -12,6 +12,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import Logo from "../../../assets/gbflogo.png";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,12 +35,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface DataType {
-  titulo: string,
-  rentabilidadeAnual: number,
-  investimentoMinimo: number,
-  disponibilidade: number,
-  vencimento: string,
-  simule: string
+  titulo: string;
+  rentabilidadeAnual: number;
+  investimentoMinimo: number;
+  disponibilidade: number;
+  vencimento: string;
+  simule: string;
 }
 
 function createData(
@@ -90,6 +91,15 @@ const rows = [
   createData("Diadema", 4.7, 16, 987654321, "01/04/2029", "/"),
 ];
 
+function MercadoRow() {
+  return (
+    <div>
+      {rows.map((row) => (
+        <RowInv cardInfo={row}/>
+      ))}
+    </div>
+  )
+}
 function MercadoTabela() {
   return (
     <TableContainer component={Paper}>
@@ -131,42 +141,108 @@ function MercadoTabela() {
   );
 }
 
-function MercadoCard(){
-  function Card ({cardInfo}:{cardInfo: DataType}) {
-    return(
-      <div style={{backgroundColor: "black", padding: 15, borderRadius: 15, width: 320}}>
+function MercadoCard() {
+  function Card({ cardInfo }: { cardInfo: DataType }) {
+    return (
+      <div
+        style={{
+          backgroundColor: "black",
+          padding: 15,
+          borderRadius: 15,
+          width: 320,
+        }}
+      >
         <h1>{cardInfo.titulo}</h1>
-      <table>
-        <tbody>
-          <th><strong>Rentabilidade anual:</strong></th>
-          <td>Selic + IPCA + {cardInfo.rentabilidadeAnual}%</td>
-        </tbody>
-        <tbody>
-          <th><strong>Valor da Cota:</strong></th>
-          <td>R$ {cardInfo.investimentoMinimo}</td>
-        </tbody>
-        <tbody>
-          <th><strong>Disponibilidade:</strong></th>
-          <td>{cardInfo.disponibilidade} cotas</td>
-        </tbody>
-        <tbody>
-          <th><strong>Vencimento:</strong></th>
-          <td>{cardInfo.vencimento}</td>
-        </tbody>
-      </table>
-      <NavButton to={cardInfo.simule}>Simule</NavButton>
-
+        <table>
+          <tbody>
+            <th>
+              <strong>Rentabilidade anual:</strong>
+            </th>
+            <td>Selic + IPCA + {cardInfo.rentabilidadeAnual}%</td>
+          </tbody>
+          <tbody>
+            <th>
+              <strong>Valor da Cota:</strong>
+            </th>
+            <td>R$ {cardInfo.investimentoMinimo}</td>
+          </tbody>
+          <tbody>
+            <th>
+              <strong>Disponibilidade:</strong>
+            </th>
+            <td>{cardInfo.disponibilidade} cotas</td>
+          </tbody>
+          <tbody>
+            <th>
+              <strong>Vencimento:</strong>
+            </th>
+            <td>{cardInfo.vencimento}</td>
+          </tbody>
+        </table>
+        <NavButton to={cardInfo.simule}>Simule</NavButton>
       </div>
-    )
+    );
   }
- return(
-  <div style={{display: "flex", gap: 25, flexWrap: "wrap", maxWidth: 1200, justifyContent: "center"}}>
-    {rows.map((row)=>(
-    <Card cardInfo={row}/>
-    ))}
-  </div>
- )
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: 25,
+        flexWrap: "wrap",
+        maxWidth: 1200,
+        justifyContent: "center",
+      }}
+    >
+      {rows.map((row) => (
+        <Card cardInfo={row} />
+      ))}
+    </div>
+  );
 }
+
+const RowInv = ({ cardInfo }: { cardInfo: DataType }) => {
+  return (
+    <div
+      style={{
+        backgroundColor: "white",
+        borderRadius: 10,
+        color: "black",
+        display: "flex",
+        textAlign: "center",
+        padding: 20,
+      }}
+    >
+      <div
+        style={{
+          flex: 2,
+          display: "flex",
+          flexDirection: "column",
+          textAlign: "left",
+        }}
+      >
+        <img src={Logo} alt="" style={{ width: 80 }} />
+        <span>{cardInfo.titulo}</span>
+        <span>Selic + IPCA + {cardInfo.rentabilidadeAnual}%</span>
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <span>Modalidades</span>
+        <span></span>
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <span>Investimento Min</span>
+        <span>R$ {cardInfo.investimentoMinimo},00</span>
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <span>Vencimento</span>
+        <span></span>
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <span>Resgate</span>
+        <span></span>
+      </div>
+    </div>
+  );
+};
 
 const MercadoMoedas = () => {
   const [viewMode, setViewMode] = useState<string>("table");
@@ -182,7 +258,7 @@ const MercadoMoedas = () => {
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
-          style={{justifyContent: "center"}}
+          style={{ justifyContent: "center" }}
           value={viewMode}
           onChange={handleRadioChange}
         >
@@ -206,15 +282,15 @@ const MercadoMoedas = () => {
   function SwtichBody() {
     switch (viewMode) {
       case "table":
-        return <MercadoTabela />;
+        return <MercadoRow />;
       case "card":
-        return <MercadoCard/>
+        return <MercadoCard />;
     }
   }
 
   return (
     <NavBody>
-      <h1 style={{marginTop: 50, textAlign: "center"}}>Mercado de Tokens</h1>
+      <h1 style={{ marginTop: 50, textAlign: "center" }}>Mercado de Tokens</h1>
       <Container>
         <RowRadioButtonsGroup />
         <SwtichBody />
