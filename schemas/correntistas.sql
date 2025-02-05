@@ -9,3 +9,8 @@ CREATE TABLE correntistas (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO correntistas (nome, cpf, data_nascimento, telefone, email, endereco)
+VALUES ('emilly', '5555555', '1985-05-05', '9999999999', 'emilly@email.com', 'rua5, numero 5, cidade 5, estado 5' );
+
+SELECT * FROM correntistas;
